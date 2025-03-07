@@ -1,3 +1,8 @@
+# Recalculate total counts for "Yes" and "No" cases
+total_yes = len(df_cleaned)  # Assuming all could be marked Yes
+total_no = len(df_cleaned)  # Assuming all could be marked No
+
+# Generate updated HTML rows with Yes/No checkboxes using icons
 html_rows_fancy = ""
 for _, row in df_cleaned.iterrows():
     full_name = f"{row['First Name']} {row['Last Name']}"
@@ -111,3 +116,12 @@ html_form_fancy = f"""
     </div>
 </body>
 </html>
+"""
+
+# Save the fancy HTML file
+fancy_html_file_path = "/mnt/data/hearing_test_form_fancy_v2.html"
+with open(fancy_html_file_path, "w") as file:
+    file.write(html_form_fancy)
+
+# Provide the downloadable link
+fancy_html_file_path
