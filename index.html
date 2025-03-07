@@ -76,11 +76,11 @@
                     <th>✔️ Yes</th>
                     <th>❌ No</th>
                 </tr>
-                <!-- Rows will be dynamically inserted -->
-                %ROWS%
+                <!-- Dynamically Generated Rows -->
+                {ROWS}
             </table>
             <div class="totals">
-                Total Yes: %TOTAL_YES% | Total No: %TOTAL_NO%
+                Total Yes: {TOTAL_YES} | Total No: {TOTAL_NO}
             </div>
             <input type="hidden" name="_subject" value="Hearing Test Report">
             <input type="submit" value="Submit">
