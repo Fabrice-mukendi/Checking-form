@@ -1,74 +1,45 @@
-# Recalculate total counts for "Yes" and "No" cases
-total_yes = len(df_cleaned)  # Assuming all could be marked Yes
-total_no = len(df_cleaned)  # Assuming all could be marked No
-
-# Generate updated HTML rows with Yes/No checkboxes using icons
-html_rows_fancy = ""
-for _, row in df_cleaned.iterrows():
-    full_name = f"{row['First Name']} {row['Last Name']}"
-    html_rows_fancy += f"""
-    <tr>
-        <td>{row['First Name']}</td>
-        <td>{row['Last Name']}</td>
-        <td style="text-align: center;">
-            <label>
-                <input type="radio" name="completed_{full_name}" value="Yes" required>
-                <span style="color: green; font-size: 18px;">✔️</span>
-            </label>
-        </td>
-        <td style="text-align: center;">
-            <label>
-                <input type="radio" name="completed_{full_name}" value="No" required>
-                <span style="color: red; font-size: 18px;">❌</span>
-            </label>
-        </td>
-    </tr>
-    """
-
-# Define the fancy HTML form structure including total counts
-html_form_fancy = f"""
 <!DOCTYPE html>
 <html>
 <head>
     <title>Hearing Test Tracking</title>
     <style>
-        body {{
+        body {
             font-family: 'Arial', sans-serif;
             text-align: center;
             background: #f4f4f4;
-        }}
-        .container {{
+        }
+        .container {
             width: 70%;
             margin: auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px 0px gray;
-        }}
-        h2 {{
+        }
+        h2 {
             color: #002F6C;
-        }}
-        table {{
+        }
+        table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-        }}
-        th, td {{
+        }
+        th, td {
             padding: 12px;
             border: 1px solid #ddd;
             text-align: center;
-        }}
-        th {{
+        }
+        th {
             background-color: #002F6C;
             color: white;
-        }}
-        input[type="radio"] {{
+        }
+        input[type="radio"] {
             display: none;
-        }}
-        input[type="radio"] + span {{
+        }
+        input[type="radio"] + span {
             cursor: pointer;
-        }}
-        input[type="submit"] {{
+        }
+        input[type="submit"] {
             background-color: #d71e28;
             color: white;
             padding: 12px 25px;
@@ -77,19 +48,19 @@ html_form_fancy = f"""
             font-size: 16px;
             border-radius: 5px;
             margin-top: 20px;
-        }}
-        input[type="submit"]:hover {{
+        }
+        input[type="submit"]:hover {
             background-color: #a1161d;
-        }}
-        img {{
+        }
+        img {
             width: 200px;
             margin-bottom: 20px;
-        }}
-        .totals {{
+        }
+        .totals {
             font-size: 18px;
             font-weight: bold;
             margin-top: 20px;
-        }}
+        }
     </style>
 </head>
 <body>
@@ -105,10 +76,11 @@ html_form_fancy = f"""
                     <th>✔️ Yes</th>
                     <th>❌ No</th>
                 </tr>
-                {html_rows_fancy}
+                <!-- Rows will be dynamically inserted -->
+                %ROWS%
             </table>
             <div class="totals">
-                Total Yes: {total_yes} | Total No: {total_no}
+                Total Yes: %TOTAL_YES% | Total No: %TOTAL_NO%
             </div>
             <input type="hidden" name="_subject" value="Hearing Test Report">
             <input type="submit" value="Submit">
@@ -116,12 +88,3 @@ html_form_fancy = f"""
     </div>
 </body>
 </html>
-"""
-
-# Save the fancy HTML file
-fancy_html_file_path = "/mnt/data/hearing_test_form_fancy_v2.html"
-with open(fancy_html_file_path, "w") as file:
-    file.write(html_form_fancy)
-
-# Provide the downloadable link
-fancy_html_file_path
